@@ -6,10 +6,11 @@ use warnings;
 package IMDB::Watchlist::Command::parse;
 use IMDB::Watchlist -command;
 use IMDB::Watchlist::RSS;
+use IMDB::Watchlist::CSV;
 
 # ABSTRACT: Parse IMDB watchlist
 
-sub description { "Parse watchlist RSS feed and show matching entries in feed" }
+sub description { "Parse watchlist CSV file and show matching entries in feed" }
 
 sub execute {
     my ($self, $opt, $args) = @_;
@@ -19,7 +20,7 @@ sub execute {
         $self->usage_error("$watchlist_file: $!");
     }
 
-    my $wl = IMDB::Watchlist::RSS->new( file => $watchlist_file );
+    my $wl = IMDB::Watchlist::CSV->new( file => $watchlist_file );
 #    print join("|", "CHANNEL", $wl->title, $wl->link) . "\n";
 #    foreach my $item ( $wl->all_items ) {
 #        print join("|", "ITEM", $item->imdb_id, $item->published_at, $item->title) . "\n";

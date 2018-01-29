@@ -74,7 +74,7 @@ sub feed_url {
 sub watchlist_file {
     my ($self) = @_;
     return $self->get('watchlist_file')
-        || $self->data_dir . "/watchlist.xml";
+        || $self->data_dir . "/watchlist.csv";
 }
 
 sub feed_file {
