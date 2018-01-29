@@ -1,0 +1,15 @@
+#!/usr/bin/env perl
+
+BEGIN {
+    use File::Basename ();
+    my $dir = ( File::Basename::fileparse(__FILE__) )[1] . "..";
+    chdir $dir;
+}
+
+use strict;
+use warnings;
+use lib "lib";
+
+use IMDB::Watchlist;
+
+IMDB::Watchlist->run();
