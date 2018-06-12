@@ -35,10 +35,40 @@ sub execute {
     }
 
     my $feed = IMDB::Watchlist::RSS->new( file => $feed_file );
-    foreach my $item ( $feed->all_items ) {
-        print join("\n", $item->title, $item->link, $item->added_at, $item->size, $item->status) . "\n\n"
-            if $item->description =~ m{$imdb_id_re};
+    print "=" x 79, "\n\n";
+    foreach my $item ( sort { $b->added_at cmp $a->added_at } $feed->all_items ) {
+        my $is_match = ( $item->description . $item->url ) =~ m{$imdb_id_re} ? 1 : 0;
+        print join("\n",
+            map { _trim($_) }
+            $item->title,
+            $item->link,
+            $item->url,
+            $item->added_at,
+            $item->size,
+            $item->status,
+        ) . "\n\n" if $is_match;
     }
+    print "=" x 79, "\n\n";
+    foreach my $item ( sort { $b->added_at cmp $a->added_at } $feed->all_items ) {
+        my $is_match = ( $item->description . $item->url ) =~ m{$imdb_id_re} ? 1 : 0;
+        print join("\n",
+            map { _trim($_) }
+            $item->title,
+            $item->link,
+            $item->url,
+            $item->added_at,
+            $item->size,
+            $item->status,
+        ) . "\n\n" unless $is_match;
+    }
+    print "=" x 79, "\n";
+}
+
+sub _trim {
+    my ($str) = @_;
+    return unless defined $str;
+    $str =~ s/^ \s* (.*?) \s* $/$1/xms;
+    return $str;
 }
 
 1;

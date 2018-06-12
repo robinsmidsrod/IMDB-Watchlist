@@ -7,6 +7,7 @@ use URI;
 has_xpath_value 'title'        => './title';
 has_xpath_value 'description'  => './description';
 has_xpath_value 'link'         => './link';
+has_xpath_value 'url'          => './url';
 
 has_xpath_value 'id'           => './guid';
 has_xpath_value 'published_at' => './pubDate';
