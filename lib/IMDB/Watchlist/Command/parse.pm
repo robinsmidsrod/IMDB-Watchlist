@@ -35,10 +35,11 @@ sub execute {
     }
 
     my $feed = IMDB::Watchlist::RSS->new( file => $feed_file );
-    print "=" x 79, "\n\n";
+    #print "=" x 79, "\n\n";
     foreach my $item ( sort { $b->added_at cmp $a->added_at } $feed->all_items ) {
         my $is_match = ( $item->description . $item->url ) =~ m{$imdb_id_re} ? 1 : 0;
         print join("\n",
+            map { '* ' . $_ }
             map { _trim($_) }
             $item->title,
             $item->link,
@@ -48,7 +49,7 @@ sub execute {
             $item->status,
         ) . "\n\n" if $is_match;
     }
-    print "=" x 79, "\n\n";
+    #print "=" x 79, "\n\n";
     foreach my $item ( sort { $b->added_at cmp $a->added_at } $feed->all_items ) {
         my $is_match = ( $item->description . $item->url ) =~ m{$imdb_id_re} ? 1 : 0;
         print join("\n",
@@ -61,7 +62,7 @@ sub execute {
             $item->status,
         ) . "\n\n" unless $is_match;
     }
-    print "=" x 79, "\n";
+    #print "=" x 79, "\n";
 }
 
 sub _trim {
