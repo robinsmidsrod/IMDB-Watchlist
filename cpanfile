@@ -1,10 +1,10 @@
+requires 'App::Cmd';
+requires 'Config::Tiny';
 requires 'File::Basename';
 requires 'lib';
-requires 'App::Cmd';
+requires 'LWP::UserAgent';
 requires 'Moo';
 requires 'Moose';
-requires 'Config::Tiny';
-requires 'LWP::UserAgent';
 requires 'Text::CSV';
-requires 'XML::Rabbit';
 requires 'URI';
+requires 'XML::Rabbit';
