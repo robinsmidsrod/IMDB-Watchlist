@@ -1,6 +1,9 @@
 requires 'App::Cmd';
 requires 'Config::Tiny';
+requires 'DateTime';
+requires 'DateTime::Format::ISO8601';
 requires 'File::Basename';
+requires 'File::Slurp';
 requires 'lib';
 requires 'LWP::UserAgent';
 requires 'Moo';

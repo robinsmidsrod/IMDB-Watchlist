@@ -83,5 +83,11 @@ sub feed_file {
         || $self->data_dir . "/feed.xml";
 }
 
+sub last_run_file {
+    my ($self) = @_;
+    return $self->get('last_run_file')
+        || $self->data_dir . "/last_run.txt";
+}
+
 no Moo;
 1;

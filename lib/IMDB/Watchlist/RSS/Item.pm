@@ -3,6 +3,8 @@
 package IMDB::Watchlist::RSS::Item;
 use XML::Rabbit;
 use URI;
+use DateTime::Format::ISO8601;
+use DateTime;
 
 has_xpath_value 'title'        => './title';
 has_xpath_value 'description'  => './description';
@@ -32,6 +34,21 @@ sub _build_imdb_id {
     my $id = $path_items[-1];
     return "" unless index($id, 'tt') == 0;
     return $id;
+}
+
+has 'added_at_datetime' => (
+    is         => 'ro',
+    isa        => 'DateTime',
+    lazy_build => 1,
+);
+
+sub _build_added_at_datetime {
+    my ($self) = @_;
+    my $formatter = DateTime::Format::ISO8601->new();
+    my $now = DateTime->now( formatter => $formatter );
+    $formatter->set_base_datetime( object => $now );
+    my $str = $self->added_at =~ s/^[^\d]*(.*)\s(.*)$/$1T$2/r; # Strip everything before a number
+    return $str ? $formatter->parse_datetime( $str ) : $now;
 }
 
 finalize_class();
