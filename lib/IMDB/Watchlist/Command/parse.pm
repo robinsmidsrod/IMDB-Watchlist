@@ -27,6 +27,7 @@ sub execute {
 #    }
 
     my $ids = join("|", $wl->all_imdb_ids);
+    #print "Looking for: $ids\n";
     my $imdb_id_re = qr{($ids)};
 
     my $feed_file = $self->app->config->feed_file;

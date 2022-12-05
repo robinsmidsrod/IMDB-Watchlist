@@ -23,15 +23,25 @@ sub execute {
 
     my $ua = LWP::UserAgent->new();
 
-    my $watchlist_url = $self->app->config->watchlist_url;
-    my $watchlist_file = $self->app->config->watchlist_file;
-    #print "Mirroring $watchlist_url to '$watchlist_file'...\n";
-    $ua->mirror($watchlist_url, $watchlist_file);
+    {
+        my $watchlist_url = $self->app->config->watchlist_url;
+        my $watchlist_file = $self->app->config->watchlist_file;
+        #print "Mirroring $watchlist_url to '$watchlist_file'...\n";
+        my $res = $ua->mirror($watchlist_url, $watchlist_file);
+        if ( ! $res->is_success ) {
+            print "Mirroring $watchlist_url caused error " . $res->status_line . "\n";
+        }
+    }
 
-    my $feed_url = $self->app->config->feed_url;
-    my $feed_file = $self->app->config->feed_file;
-    #print "Mirroring $feed_url to '$feed_file'...\n";
-    $ua->mirror($feed_url, $feed_file);
+    {
+        my $feed_url = $self->app->config->feed_url;
+        my $feed_file = $self->app->config->feed_file;
+        #print "Mirroring $feed_url to '$feed_file'...\n";
+        my $res = $ua->mirror($feed_url, $feed_file);
+        if ( ! $res->is_success ) {
+            print "Mirroring $feed_url caused error " . $res->status_line . "\n";
+        }
+    }
 }
 
 1;
