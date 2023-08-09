@@ -21,7 +21,9 @@ sub execute {
             or $self->usage_error("Unable to create data directory '$data_dir'");
     }
 
-    my $ua = LWP::UserAgent->new();
+    my $ua = LWP::UserAgent->new(
+        'agent' => "IMDB::Watchlist/${IMDB::Watchlist::VERSION}" # Avoid error code 1010 from Cloudflare (banned user-agent)
+    );
 
     {
         my $watchlist_url = $self->app->config->watchlist_url;
@@ -29,7 +31,8 @@ sub execute {
         #print "Mirroring $watchlist_url to '$watchlist_file'...\n";
         my $res = $ua->mirror($watchlist_url, $watchlist_file);
         if ( ! $res->is_success ) {
-            print "Mirroring $watchlist_url caused error " . $res->status_line . "\n";
+            print "Mirroring $watchlist_url caused HTTP error " . $res->status_line . "\n";
+            print $res->as_string . "\n";
         }
     }
 
@@ -39,7 +42,8 @@ sub execute {
         #print "Mirroring $feed_url to '$feed_file'...\n";
         my $res = $ua->mirror($feed_url, $feed_file);
         if ( ! $res->is_success ) {
-            print "Mirroring $feed_url caused error " . $res->status_line . "\n";
+            print "Mirroring $feed_url caused HTTP error: " . $res->status_line . "\n";
+            print $res->as_string . "\n";
         }
     }
 }
