@@ -15,5 +15,16 @@ Install the `cpanm` tool and CPAN dependencies:
 
 #### TESTING
 
+To run the test suite you use tried-and-true `prove` tool.
+
+    $ prove                  # run entire test suite
+    $ prove -v t/002_blobs.t # run a single test in verbose mode
+
+It is also possible to run the test suite and generate code coverage statistics.
+
+    $ PERL5OPT=-MDevel::Cover prove && cover
+
+Open the file `cover_db/coverage.html` in a browser to inspect the details.
+
 #### USAGE
 
