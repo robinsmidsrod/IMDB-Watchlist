@@ -6,23 +6,23 @@ use warnings;
 package IMDB::Watchlist::Command::new;
 use IMDB::Watchlist -command;
 use IMDB::Watchlist::RSS;
-use IMDB::Watchlist::CSV;
+use IMDB::Watchlist::HTML;
 use DateTime::Format::ISO8601;
 use File::Slurp qw(read_file write_file);
 
 # ABSTRACT: Parse IMDB watchlist and show new items only
 
-sub description { "Parse watchlist CSV file and show new matching entries in feed" }
+sub description { "Parse watchlist HTML file and show new matching entries in feed" }
 
 sub execute {
     my ($self, $opt, $args) = @_;
 
-    my $watchlist_file = $self->app->config->watchlist_file;
+    my $watchlist_file = $self->app->config->watchlist_html_file;
     if ( ! -r $watchlist_file ) {
         $self->usage_error("$watchlist_file: $!");
     }
 
-    my $wl = IMDB::Watchlist::CSV->new( file => $watchlist_file );
+    my $wl = IMDB::Watchlist::HTML->new( file => $watchlist_file );
 #    print join("|", "CHANNEL", $wl->title, $wl->link) . "\n";
 #    foreach my $item ( $wl->all_items ) {
 #        print join("|", "ITEM", $item->imdb_id, $item->published_at, $item->title) . "\n";
