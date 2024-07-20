@@ -3,7 +3,7 @@
 use strict;
 use warnings;
 
-package IMDB::Watchlist::Command::parse;
+package IMDB::Watchlist::Command::parse_csv;
 use IMDB::Watchlist -command;
 use IMDB::Watchlist::RSS;
 use IMDB::Watchlist::CSV;
