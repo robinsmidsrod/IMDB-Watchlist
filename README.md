@@ -1,7 +1,8 @@
 #### DESCRIPTION
 
-IMDB-Watchlist is a simple tool to find IMDB links in an RSS feed. The specific IMDB links should be filtered from a specific
-IMDB watchlist so you only get the items in the feed that match entries in the watchlist.
+IMDB-Watchlist is a simple tool to find IMDB links in an RSS feed. The
+specific IMDB links should be filtered from a specific IMDB watchlist so you
+only get the items in the feed that match entries in the watchlist.
 
 #### INSTALLATION
 
@@ -12,6 +13,7 @@ Install the `cpanm` tool and CPAN dependencies:
 
 #### CONFIGURATION
 
+TODO
 
 #### TESTING
 
@@ -28,3 +30,4 @@ Open the file `cover_db/coverage.html` in a browser to inspect the details.
 
 #### USAGE
 
+TODO
