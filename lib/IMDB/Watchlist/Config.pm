@@ -66,6 +66,12 @@ sub watchlist_url {
         || "http://rss.imdb.com/user/" . $self->imdb_user_id . "/watchlist";
 }
 
+sub watchlist_html_url {
+    my ($self) = @_;
+    return $self->get('watchlist_html_url')
+        || "https://www.imdb.com/user/" . $self->imdb_user_id . "/watchlist/?sort=list_order%2Cdesc";
+}
+
 sub feed_url {
     my ($self) = @_;
     return $self->get('feed_url');
@@ -75,6 +81,12 @@ sub watchlist_file {
     my ($self) = @_;
     return $self->get('watchlist_file')
         || $self->data_dir . "/watchlist.csv";
+}
+
+sub watchlist_html_file {
+    my ($self) = @_;
+    return $self->get('watchlist_html_file')
+        || $self->data_dir . "/watchlist.html";
 }
 
 sub feed_file {

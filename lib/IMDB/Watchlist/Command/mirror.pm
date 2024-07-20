@@ -26,8 +26,8 @@ sub execute {
     );
 
     {
-        my $watchlist_url = $self->app->config->watchlist_url;
-        my $watchlist_file = $self->app->config->watchlist_file;
+        my $watchlist_url = $self->app->config->watchlist_html_url;
+        my $watchlist_file = $self->app->config->watchlist_html_file;
         #print "Mirroring $watchlist_url to '$watchlist_file'...\n";
         my $res = $ua->mirror($watchlist_url, $watchlist_file);
         if ( ! $res->is_success ) {
