@@ -22,7 +22,7 @@ sub execute {
     }
 
     my $ua = LWP::UserAgent->new(
-        'agent' => "IMDB::Watchlist/${IMDB::Watchlist::VERSION}" # Avoid error code 1010 from Cloudflare (banned user-agent)
+        'agent' => $self->app->config->http_user_agent, # Avoid error code 1010 from Cloudflare (banned user-agent)
     );
 
     {

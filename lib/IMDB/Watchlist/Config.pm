@@ -101,5 +101,11 @@ sub last_run_file {
         || $self->data_dir . "/last_run.txt";
 }
 
+sub http_user_agent {
+    my ($self) = @_;
+    return $self->get('http_user_agent')
+        || "IMDB::Watchlist/${IMDB::Watchlist::VERSION}";
+}
+
 no Moo;
 1;
